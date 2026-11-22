@@ -28,7 +28,7 @@ class OrderFeatureEngineering:
 
         data["category_id"] = data["category"].map(self.category_to_id_).fillna(-1).astype(int)
 
-        cols_to_drop = ["user_id", "order_time", "category", "is_not_byout"]
+        cols_to_drop = ["user_id", "order_time", "category", "is_not_buyout"]
         existing_drop = [c for c in cols_to_drop if c in data.columns]
         return data.drop(columns=existing_drop)
 

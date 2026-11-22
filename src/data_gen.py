@@ -10,7 +10,7 @@ def generation_orders(n_rows: int =  5000, random_state: int=42) -> pd.DataFrame
     user_id = rng.integers(1, n_users + 1, size=n_rows)
 
     user_base_rates = rng.uniform(0.2, 1.0, size=n_users + 1)
-    user_bayout_rate = user_base_rates[user_id].round(2)
+    user_buyout_rate = user_base_rates[user_id].round(2)
     user_order_count = rng.integers(0, 51, size=n_rows)
 
     start_date = pd.Timestamp('2026-08-01')
@@ -41,7 +41,7 @@ def generation_orders(n_rows: int =  5000, random_state: int=42) -> pd.DataFrame
 
     risk_score = (
         -3.6
-        + 2.6 * (1-user_bayout_rate)
+        + 2.6 * (1-user_buyout_rate)
         + 0.7 * is_night
         + 0.4 * is_expensive
         + 0.5 * is_clothes
@@ -49,7 +49,7 @@ def generation_orders(n_rows: int =  5000, random_state: int=42) -> pd.DataFrame
         + hidden_noise
     )
     prob = 1 / (1 + np.exp(-risk_score))
-    is_not_byout = rng.binomial(1, prob)
+    is_not_buyout = rng.binomial(1, prob)
 
     df = pd.DataFrame(
         {
@@ -59,8 +59,8 @@ def generation_orders(n_rows: int =  5000, random_state: int=42) -> pd.DataFrame
             "items_count": items_count,
             "order_amount": order_amount,
             "user_orders_count": user_order_count,
-            "user_byout_rate": user_bayout_rate,
-            "is_not_byout": is_not_byout
+            "user_byout_rate": user_buyout_rate,
+            "is_not_byout": is_not_buyout
         }
     )
     
