@@ -1,6 +1,6 @@
 import pandas as pd
 
-class OrderFeatureEnginiring:
+class OrderFeatureEngineering:
     def __init__(self):
         self.category_mean_amount_: dict[str, float] = {}
         self.category_to_id_: dict[str, int] ={
@@ -35,7 +35,7 @@ class OrderFeatureEnginiring:
 if __name__ == "__main__":
     from src.data_gen import generation_orders
     df = generation_orders(200)
-    fe = OrderFeatureEnginiring()
+    fe = OrderFeatureEngineering()
     X = fe.fit(df).transform(df)
     print(X.head())
     print("\nЗапомненные средние по категориям:", fe.category_mean_amount_)
